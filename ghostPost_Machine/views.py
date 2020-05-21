@@ -1,10 +1,10 @@
-from django.shortcuts import render, reverse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect
 from ghostPost_Machine.models import BoastOrRoast
 from ghostPost_Machine.forms import AddPost
 
 
 def index(request):
-    feedData = BoastOrRoast.objects.all()
+    feedData = BoastOrRoast.objects.order_by('date')
     return render(request, 'index.html', {"feedData": feedData})
 
 
@@ -38,12 +38,19 @@ def boastsview(request):
 def likesview(request, post_id):
     post = BoastOrRoast.objects.get(id=post_id)
     post.likes += 1
+    post.vote_score = post.likes - post.dislikes
     post.save()
     return HttpResponseRedirect('/')
 
 
 def dislikesview(request, post_id):
     post = BoastOrRoast.objects.get(id=post_id)
-    post.likes -= 1
+    post.dislikes += 1
+    post.vote_score = post.likes - post.dislikes
     post.save()
     return HttpResponseRedirect('/')
+
+
+def voteview(request):
+    feedData = BoastOrRoast.objects.order_by('vote_score')
+    return render(request, 'voteView.html', {"feedData": feedData})

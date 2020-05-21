@@ -6,9 +6,10 @@
     <title>GhostPost</title>
 </head>
 <body>
-    <span><a href="/addpost/">add Post</a></span>
-    <span><a href="/roastsview/">Roast View</a></span>
-    <span><a href="/boastsview/">Boast View</a></span>
+    <button><a href="/addpost/">add Post</a></button>
+    <button><a href="/roastsview/">Roast View</a></button>
+    <button><a href="/boastsview/">Boast View</a></button>
+    <button><a href="/voteview/">Sort by Vote Score</a></button>
     <h1>Boast or Roast</h1>
     <div style=
     "
@@ -22,19 +23,20 @@
         {% for item in feedData %}
         <ul>
             <li style="border: solid black 4px; padding: 10px;">
-                <p>{{ item.description }} like(s) : {{ item.likes }}</p>
-                <br>
+                <p>{{ item.description }}</p>
+                <p>vote_score : {{ item.vote_score }}</p>
                 <div>
-                    <span><a href='/like/{{item.id}}/'>like</a></span>
-                    <span><a href='/dislike/{{item.id}}/'>dislike</a></span>
+                    <button><a href='/like/{{item.id}}/'>like</a></button>
+                    <button><a href='/dislike/{{item.id}}/'>dislike</a></button>
                 </div>
                 <br>
                 {% if item.isBoast == True %}
-                    <span><a href="/boastsview/">Boast View</a></span>
+                    <button><a href="/boastsview/">Boast View</a></button>
                 {% elif item.isBoast == False %}
-                    <span><a href="/roastsview/">Roast View</a></span>
+                    <button><a href="/roastsview/">Roast View</a></button>
                 {% endif %}
                 <br>
+                <p>like(s): {{item.likes}}</p>
                 <p>created at: {{item.date}}</p>
             </li>
         </ul>
