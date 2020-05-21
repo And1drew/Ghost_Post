@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostPost</title>
+</head>
+<body>
+    <span><a href="/addpost/">add Post</a></span>
+    <span><a href="/roastsview/">Roast View</a></span>
+    <span><a href="/boastsview/">Boast View</a></span>
+    <h1>Boast or Roast</h1>
+    <div style=
+    "
+    width: 80%; 
+    height: 80%;
+    display: flex;
+    flex-flow: column-reverse wrap;
+    align-content: flex-start;
+    font-size: 16pt;
+    ">
+        {% for item in feedData %}
+        <ul>
+            <li style="border: solid black 4px; padding: 10px;">
+                <p>{{ item.description }} like(s) : {{ item.likes }}</p>
+                <br>
+                <div>
+                    <span><a href='/like/{{item.id}}/'>like</a></span>
+                    <span><a href='/dislike/{{item.id}}/'>dislike</a></span>
+                </div>
+                <br>
+                {% if item.isBoast == True %}
+                    <span><a href="/boastsview/">Boast View</a></span>
+                {% elif item.isBoast == False %}
+                    <span><a href="/roastsview/">Roast View</a></span>
+                {% endif %}
+                <br>
+                <p>created at: {{item.date}}</p>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+</body>
+</html>

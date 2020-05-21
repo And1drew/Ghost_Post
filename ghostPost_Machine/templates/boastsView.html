@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Boast Page</h1>
+    <div style=
+    "
+    width: 80%; 
+    height: 80%;
+    display: flex;
+    flex-flow: column-reverse wrap;
+    align-content: flex-start;
+    font-size: 16pt;
+    ">
+        <ul>
+            {% for item in boastInfo %}
+            <li style="border: solid black 4px; padding: 10px;">
+                <p>{{ item.description }} like(s) :{{ item.likes }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+        <span><a href="/">Home</a></span>
+</body>
+</html>
